@@ -108,3 +108,7 @@ resource "aws_network_interface" "main_network_interface" {
         State = var.tags[0].State
   }
 }
+
+data "aws_network_interface" "id_network_interface" {
+  id = aws_network_interface.main_network_interface.id 
+}
