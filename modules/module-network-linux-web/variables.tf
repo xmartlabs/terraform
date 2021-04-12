@@ -1,23 +1,3 @@
-variable "ec2name" {
-  description = "name for the EC2 instance"
-  default= "ec2name"
-}
-variable "key_name" {
-  description = "key to be used by the EC2"
-  default= "key_name"
-}
-variable "size" {
-  description = "instance type for the EC2"
-  default= "t2-micro"
-}
-variable "root_disk"{
-    description= "root disk definition"
-    default= [{ volume_size = "100",volume_type = "gp2"}]
-}
-variable "amiid" {
-  description = "amazon-linux"
-}
-
 variable "region" {
     description = "region"
     default = "us-east-1"
