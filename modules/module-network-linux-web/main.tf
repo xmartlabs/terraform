@@ -8,20 +8,38 @@ terraform {
 }
 
 provider "aws" {
-  region  = var.region
+  region = var.region
 }
 
 resource "aws_vpc" "main_vpc" {
-  cidr_block       = var.vpc[0].cidr_block
-  instance_tenancy = var.vpc[0].instance_tenancy
+  cidr_block           = var.vpc[0].cidr_block
+  instance_tenancy     = var.vpc[0].instance_tenancy
   enable_dns_hostnames = var.vpc[0].enable_dns_hostnames
-  enable_dns_support = var.vpc[0].enable_dns_support
+  enable_dns_support   = var.vpc[0].enable_dns_support
   tags = {
-    Name = var.vpc[0].name
+    Name    = var.vpc[0].name
     Project = var.tags[0].Project
-    State = var.tags[0].State
-   }
+    State   = var.tags[0].State
+  }
 }
+
+resource "aws_instance" "ec2-instance" {
+  ami           = var.amiid
+  instance_type = var.size
+  root_block_device {
+    volume_size = var.root_disk[0].volume_size
+    volume_type = var.root_disk[0].volume_type
+  }
+  depends_on = [ aws_vpc.main_vpc, ]
+  key_name   = var.key_name
+  user_data  = templatefile(var.user_data_path, {})
+  tags = {
+    Name    = var.ec2name
+    Project = var.tags[0].Project
+    State   = var.tags[0].State
+  }
+}
+
 
 resource "aws_subnet" "subnet-1" {
   vpc_id                  = aws_vpc.main_vpc.id
@@ -29,15 +47,15 @@ resource "aws_subnet" "subnet-1" {
   availability_zone       = var.subnet_prefix[0].availability_zone
   map_public_ip_on_launch = var.subnet_prefix[0].map_public_ip_on_launch
   tags = {
-    Name = var.subnet_prefix[0].name
+    Name    = var.subnet_prefix[0].name
     Project = var.tags[0].Project
-    State = var.tags[0].State
-    }
+    State   = var.tags[0].State
+  }
 }
 
 resource "aws_security_group" "main_security_group" {
-  name        = var.security_group[0].name
-  vpc_id      = aws_vpc.main_vpc.id
+  name   = var.security_group[0].name
+  vpc_id = aws_vpc.main_vpc.id
   ingress {
     description = "HTTPS"
     from_port   = 443
@@ -66,49 +84,49 @@ resource "aws_security_group" "main_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = var.security_group[0].name
+    Name    = var.security_group[0].name
     Project = var.tags[0].Project
-    State = var.tags[0].State
-    }
+    State   = var.tags[0].State
+  }
 }
 
 resource "aws_internet_gateway" "main_igw" {
-   vpc_id = aws_vpc.main_vpc.id
- }
+  vpc_id = aws_vpc.main_vpc.id
+}
 
 resource "aws_route_table" "main_route_table" {
-   vpc_id = aws_vpc.main_vpc.id
-   route {
-     cidr_block = var.route_table[0].cidr_block
-     gateway_id = aws_internet_gateway.main_igw.id
-   }
-   route {
-     ipv6_cidr_block = var.route_table[0].ipv6_cidr_block
-     gateway_id      = aws_internet_gateway.main_igw.id
-   }
-   tags = {
-        Name = var.route_table[0].name
-        Project = var.tags[0].Project
-        State = var.tags[0].State
-    }
+  vpc_id = aws_vpc.main_vpc.id
+  route {
+    cidr_block = var.route_table[0].cidr_block
+    gateway_id = aws_internet_gateway.main_igw.id
+  }
+  route {
+    ipv6_cidr_block = var.route_table[0].ipv6_cidr_block
+    gateway_id      = aws_internet_gateway.main_igw.id
+  }
+  tags = {
+    Name    = var.route_table[0].name
+    Project = var.tags[0].Project
+    State   = var.tags[0].State
+  }
 }
 
 resource "aws_route_table_association" "a" {
-   subnet_id      = aws_subnet.subnet-1.id
-   route_table_id = aws_route_table.main_route_table.id
- }
+  subnet_id      = aws_subnet.subnet-1.id
+  route_table_id = aws_route_table.main_route_table.id
+}
 
 resource "aws_network_interface" "main_network_interface" {
   subnet_id       = aws_subnet.subnet-1.id
   private_ips     = var.network_interface[0].private_ips
   security_groups = [aws_security_group.main_security_group.id]
   tags = {
-        Name = var.network_interface[0].name
-        Project = var.tags[0].Project
-        State = var.tags[0].State
+    Name    = var.network_interface[0].name
+    Project = var.tags[0].Project
+    State   = var.tags[0].State
   }
 }
 
 data "aws_network_interface" "id_network_interface" {
-  id = aws_network_interface.main_network_interface.id 
+  id = aws_network_interface.main_network_interface.id
 }
