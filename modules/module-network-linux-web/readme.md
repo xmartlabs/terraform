@@ -4,12 +4,12 @@
 
 This module generates all de network necessaries to deploy web services, this module did not create de aws-ec2 instance.
 This module creates:
--Vpc
--Subnet
--Security group and open de https, http ports and ssh port
--Gateway
--Route table
--Network interface
+- Vpc
+- Subnet
+- Security group and open de https, http ports and ssh port
+- Gateway
+- Route table
+- Network interface
 
 ## How to use this module
 
