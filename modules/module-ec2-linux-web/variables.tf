@@ -30,7 +30,7 @@ variable "key_name" {
 }
 variable "size" {
   description = "instance type for the EC2"
-  default     = "t2-micro"
+  default     = "t2.micro"
 }
 variable "root_disk" {
   description = "root disk definition"
