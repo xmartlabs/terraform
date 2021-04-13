@@ -21,7 +21,7 @@ variable "device_index_network_interface" {
   default     = "0"
 }
 
-varianle "id_network_interface" {
+variable "id_network_interface" {
   description = "network interface definition"
 }
 
