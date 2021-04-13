@@ -8,12 +8,6 @@ variable "tags" {
   default     = [{ Project = "not created", State = "not created" }]
 }
 
-variable "ec2name" {
-  description = "name for the EC2 instance"
-  default     = "default-ec2name"
-}
-
-
 # Networking
 
 variable "device_index_network_interface" {
