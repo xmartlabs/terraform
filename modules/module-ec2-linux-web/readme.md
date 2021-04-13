@@ -1,4 +1,4 @@
-# Module Doc
+# Module EC2
 
 ## What it does
 
