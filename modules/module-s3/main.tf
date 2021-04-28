@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "bucket" {
   acl    = var.bucket[0].acl
   
   tags = {
-    Name = var.subnet_prefix[0].name
+    Name = var.tags[0].name
     Project = var.tags[0].Project
     State = var.tags[0].State
   }
