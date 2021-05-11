@@ -23,5 +23,6 @@ resource "aws_s3_bucket" "bucket" {
   cors_rule {
     allowed_methods = var.cors_rule[0].allowed_methods
     allowed_origins = var.cors_rule[0].allowed_origins
+    max_age_seconds = 3000
   }
 }
