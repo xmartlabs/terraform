@@ -5,8 +5,10 @@
 This module generates all de network necessaries to deploy web services, this module did not create de aws-ec2 instance.
 This module creates:
 - Vpc
-- Subnet
+- Subnet private
+- Subnet public
 - Security group and open de https, http ports and ssh port
+- Security group and open de port for the data base
 - Gateway
 - Route table
 - Network interface
@@ -28,7 +30,7 @@ If you want, like an argument in the module block, you could set values for the 
 
 ```
 module "module-network-linux-web" {
-	 source = "github.com/xmartlabs/terraform.git?ref=module-network-linux-web/modules/module-network-linux-web"
+	source = "github.com/xmartlabs/terraform.git?ref=module-network-linux-web/modules/module-network-linux-web"
      region = "us-east-1"
      tags= [{ Project = "test module", State = "test" }]
 }
