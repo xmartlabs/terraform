@@ -29,7 +29,7 @@ resource "aws_subnet" "subnet-1" {
   availability_zone       = var.subnet_prefix_pubic[0].availability_zone
   map_public_ip_on_launch = var.subnet_prefix_pubic[0].map_public_ip_on_launch
   tags = {
-    Name = var.subnet_prefix[0].name
+    Name = var.subnet_prefix_pubic[0].name
     Project = var.tags[0].Project
     State = var.tags[0].State
     }
@@ -42,7 +42,7 @@ resource "aws_subnet" "subnet-2" {
   availability_zone       = var.subnet_prefix_private[0].availability_zone
   map_public_ip_on_launch = var.subnet_prefix_private[0].map_public_ip_on_launch
   tags = {
-    Name = var.subnet_prefix[0].name
+    Name = var.subnet_prefix_private[0].name
     Project = var.tags[0].Project
     State = var.tags[0].State
     }
@@ -79,7 +79,7 @@ resource "aws_security_group" "security_group_web" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = var.security_group[0].name
+    Name = var.security_group_web[0].name
     Project = var.tags[0].Project
     State = var.tags[0].State
   }
@@ -89,14 +89,13 @@ resource "aws_security_group" "security_group_db" {
   name        = var.security_group_db[0].Name
   vpc_id      = aws_vpc.vpc.id
   
-  ingress_with_cidr_blocks = [
-    {
+  ingress {
       from_port   = var.security_group_db[0].dbport
       to_port     = var.security_group_db[0].dbport
       protocol    = "tcp"
       cidr_blocks = var.vpc[0].cidr_block 
-    },
-  ]
+  }
+  s
   tags = {
     Name = var.security_group_db[0].name
     Project = var.tags[0].Project
