@@ -7,7 +7,6 @@ terraform {
   }
 }
 
-
 resource "aws_vpc" "vpc" {
   cidr_block       = var.vpc[0].cidr_block
   instance_tenancy = var.vpc[0].instance_tenancy
@@ -83,14 +82,14 @@ resource "aws_security_group" "security_group_web" {
 }
 
 resource "aws_security_group" "security_group_db" {
-  name        = var.security_group_db[0].Name
+  name        = var.security_group_db[0].name
   vpc_id      = aws_vpc.vpc.id
   
   ingress {
       from_port   = var.security_group_db[0].dbport
       to_port     = var.security_group_db[0].dbport
       protocol    = "tcp"
-      cidr_blocks = var.vpc[0].cidr_block 
+      cidr_blocks = [var.vpc[0].cidr_block]
   }
   tags = {
     Name = var.security_group_db[0].name
