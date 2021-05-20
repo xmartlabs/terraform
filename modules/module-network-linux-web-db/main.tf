@@ -132,7 +132,7 @@ resource "aws_route_table_association" "a" {
 resource "aws_network_interface" "network_interface" {
   subnet_id       = aws_subnet.subnet-1.id
   private_ips     = var.network_interface[0].private_ips
-  security_groups = [aws_security_group.security_group.id]
+  security_groups = [aws_security_group.security_group_web.id]
   tags = {
         Name = var.network_interface[0].name
         Project = var.tags[0].Project
