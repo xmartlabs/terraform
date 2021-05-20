@@ -95,7 +95,6 @@ resource "aws_security_group" "security_group_db" {
       protocol    = "tcp"
       cidr_blocks = var.vpc[0].cidr_block 
   }
-  s
   tags = {
     Name = var.security_group_db[0].name
     Project = var.tags[0].Project
