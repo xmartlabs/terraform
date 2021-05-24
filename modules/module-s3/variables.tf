@@ -17,6 +17,15 @@ variable "bucket" {
 
 variable "cors_rule" {
   description = "required - default important variable for s3 resources"
-  default     = [{allowed_methods = ["PUT","GET"],allowed_origins = ["*"]}]
+  default     = [{allowed_methods = ["GET"],allowed_origins = ["*"], max_age_seconds = 3000}]
 }
 
+variable "policy" {
+  description = "required - default important variable for s3 resources"
+   default    = [{Sid="PublicListGet",Effect="Allow",Principal="*"}]
+}
+
+variable "action_policy" {
+   description = "required - default important variable for s3 resources"
+   default    = ["s3:GetObject"]
+}
