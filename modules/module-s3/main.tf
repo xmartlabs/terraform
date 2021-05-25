@@ -32,7 +32,7 @@ resource "aws_s3_bucket_policy" "policy-s3" {
   bucket = aws_s3_bucket.bucket.id
 
   policy = jsonencode({
-    Id      = var.tags[0].Name
+    Id      = var.bucket[0].bucket
     Statement = [
       {
         Sid       = var.policy[0].Sid
