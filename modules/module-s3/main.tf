@@ -36,9 +36,9 @@ resource "aws_s3_bucket_policy" "policy-s3" {
     Project = var.tags[0].Project
     State = var.tags[0].State
   }
-  
+
   policy = jsonencode({
-    Id      = var.id-fe
+    Id      = var.tags[0].Name
     Statement = [
       {
         Sid       = var.policy[0].Sid
