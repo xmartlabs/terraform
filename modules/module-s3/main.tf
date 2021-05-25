@@ -31,12 +31,6 @@ resource "aws_s3_bucket" "bucket" {
 resource "aws_s3_bucket_policy" "policy-s3" {
   bucket = aws_s3_bucket.bucket.id
 
-  tags = {
-    Name = var.tags[0].Name
-    Project = var.tags[0].Project
-    State = var.tags[0].State
-  }
-
   policy = jsonencode({
     Id      = var.tags[0].Name
     Statement = [
