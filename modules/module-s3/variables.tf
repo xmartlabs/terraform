@@ -5,7 +5,7 @@ variable "region" {
 
 variable "tags" {
   description = "required - default important tags for resources"
-  default     = [{ Name = "not created",Project = "not created", State = "not created" }]
+  default     = [{ Project = "not created", State = "not created" }]
 }
 
 #S3
