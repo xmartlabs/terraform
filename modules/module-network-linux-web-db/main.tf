@@ -29,7 +29,7 @@ resource "aws_subnet" "subnet-1" {
   availability_zone       = var.subnet_prefix_public[0].availability_zone
   map_public_ip_on_launch = var.subnet_prefix_public[0].map_public_ip_on_launch
   tags = {
-    Name = var.subnet_prefix_pubic[0].name
+    Name = var.subnet_prefix_public[0].name
     Project = var.tags[0].Project
     State = var.tags[0].State
     }
