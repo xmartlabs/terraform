@@ -21,12 +21,12 @@ variable "subnet_prefix_public" {
 
 variable "subnet_prefix_private_1" {
   description = "The subnet prefix"
-  default     = [{ name = "terraform_module_subnet_pubic", cidr_block = "10.0.1.0/24", availability_zone = "us-east-1a", map_public_ip_on_launch = true }]
+  default     = [{ name = "terraform_module_subnet_pubic", cidr_block = "10.0.2.0/24", availability_zone = "us-east-1a", map_public_ip_on_launch = true }]
 }
 
 variable "subnet_prefix_private_2" {
   description = "The subnet prefix"
-  default     = [{ name = "terraform_module_subnet_private", cidr_block = "10.0.2.0/24", availability_zone = "us-east-1b", map_public_ip_on_launch = false }]
+  default     = [{ name = "terraform_module_subnet_private", cidr_block = "10.0.3.0/24", availability_zone = "us-east-1b", map_public_ip_on_launch = false }]
 }
 
 variable "security_group_web" {
