@@ -9,12 +9,12 @@ output "vpc_id" {
 output "security_group_db_id" {
   value = aws_security_group.security_group_db.id
 }
-output "private_subnet_id" {
+output "private_subnet_id_1" {
   value = aws_subnet.subnet-2.id
 }
 output "private_subnet_id_2" {
   value = aws_subnet.subnet-3.id
 }
-output "public_subnet_id_1" {
+output "public_subnet_id" {
   value = aws_subnet.subnet-1.id
 }
