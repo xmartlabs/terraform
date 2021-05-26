@@ -12,6 +12,9 @@ output "security_group_db_id" {
 output "private_subnet_id" {
   value = aws_subnet.subnet-2.id
 }
-output "pubic_subnet_id" {
+output "public_subnet_id_2" {
+  value = aws_subnet.subnet-3.id
+}
+output "public_subnet_id_1" {
   value = aws_subnet.subnet-1.id
 }
