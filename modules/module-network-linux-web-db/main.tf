@@ -36,16 +36,16 @@ resource "aws_subnet" "subnet-1" {
 }
 
 #Private subnet 1
-  resource "aws_subnet" "subnet-2"
-    vpc_id                  = aws_vpc.vpc.id
-    cidr_block              = var.subnet_prefix_private_1[0].cidr_block
-    availability_zone       = var.subnet_prefix_private_1[0].availability_zone
-    map_public_ip_on_launch = var.subnet_prefix_private_1[0].map_public_ip_on_launch
-    tags = {
-      Name = var.subnet_prefix_private[0].name
-      Project = var.tags[0].Project
-      State = var.tags[0].State
-      }
+resource "aws_subnet" "subnet-2"{
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = var.subnet_prefix_private_1[0].cidr_block
+  availability_zone       = var.subnet_prefix_private_1[0].availability_zone
+  map_public_ip_on_launch = var.subnet_prefix_private_1[0].map_public_ip_on_launch
+  tags = {
+    Name = var.subnet_prefix_private[0].name
+    Project = var.tags[0].Project
+    State = var.tags[0].State
+    }
 }
 
 #Private subnet 2
