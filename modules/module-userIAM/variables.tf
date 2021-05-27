@@ -1,7 +1,6 @@
 # Generics
 variable "region" {
   description = "required - region"
-  default = "us-east-1"
 }
 
 variable "tags" {
@@ -12,16 +11,12 @@ variable "tags" {
 # IAM user
 
 variable "user" {
-  description = ""
-  default     = [{ name= "test-devops-user" }]
+  description = "variables-user"
+  default     = [{ name= "terraform-user" }]
 }
 
-variable "goup" {
-  description = ""
-  default     = [{ name= "test-devops-group" }]
-}
-
+#This policy give permission of put objects in a bucket s3
 variable "policy" {
-  description = ""
-  default     = [{ name= "test-devops-group"},{Effect = "Allow", Action = "s3:PutObject",Resource= "arn:aws:s3:::testputobject-devops/*"}]
+  description = "variable-policy"
+  default     = [{ name= "terraform-policy"},{Effect = "Allow", Action = "s3:PutObject",Resource= "arn for your resource e.g. S3"}]
 }
