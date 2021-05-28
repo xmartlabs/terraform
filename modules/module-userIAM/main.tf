@@ -11,7 +11,7 @@ provider "aws" {
   region  = var.region
 }
 
-resource "aws_iam_user" "stage-Be" {
+resource "aws_iam_user" "user" {
     name = var.user[0].name
     tags = {
         Name = var.user[0].name
@@ -20,14 +20,14 @@ resource "aws_iam_user" "stage-Be" {
     }
 }
 
-resource "aws_iam_access_key" "stage-Be" {
-  user = aws_iam_user.stage-Be.name
+resource "aws_iam_access_key" "userak" {
+  user = aws_iam_user.user.name
 }
 
 resource "aws_iam_user_policy" "policy" {
     name        = var.policy[0].name
 
-    user = aws_iam_user.stage-Be.name
+    user = aws_iam_user.user.name
 
     policy = jsonencode({
     Version = "2012-10-17"

@@ -18,5 +18,5 @@ variable "user" {
 #This policy give permission of put objects in a bucket s3
 variable "policy" {
   description = "variable-policy"
-  default     = [{ name= "terraform-policy"},{Effect = "Allow", Action = "s3:PutObject",Resource= "arn for your resource e.g. S3"}]
+  default     = [{ name= "terraform-policy"},{Effect = "Allow", Action = "s3:PutObject",Resource="arn:aws:s3:::{NameBucket}/*"}]
 }
