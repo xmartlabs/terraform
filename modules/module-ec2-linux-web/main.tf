@@ -30,3 +30,20 @@ resource "aws_instance" "ec2-instance" {
     network_interface_id = var.id_network_interface
   }
 }
+
+resource "aws_eip" "eip_ec2instance" {
+  name = "eip-ec2" 
+  instance = aws_instance.ec2-instance.id
+  vpc = true
+  
+  tags = {
+   Name    = var.ec2name
+    Project = var.tags[0].Project
+    State   = var.tags[0].State
+  }
+}
+
+resource "aws_eip_association" "eip_associate" {
+  instance_id   = aws_instance.ec2-instance.id
+  allocation_id = aws_eip.eip_ec2instance.id
+}
