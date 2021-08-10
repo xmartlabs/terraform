@@ -32,7 +32,6 @@ resource "aws_instance" "ec2-instance" {
 }
 
 resource "aws_eip" "eip_ec2instance" {
-  name = "eip-ec2" 
   instance = aws_instance.ec2-instance.id
   vpc = true
   
