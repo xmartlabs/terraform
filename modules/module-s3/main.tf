@@ -14,33 +14,31 @@ provider "aws" {
 
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket[0].bucket
-  acl    = var.bucket[0].acl
-  
+
   tags = {
     Name = var.bucket[0].bucket
     Project = var.tags[0].Project
     State = var.tags[0].State
   }
+}
+
+resource "aws_s3_bucket_cors_configuration" "example" {
+  bucket = aws_s3_bucket.bucket.bucket
+
   cors_rule {
+    allowed_headers = ["*"]
     allowed_methods = var.cors_rule[0].allowed_methods
     allowed_origins = var.cors_rule[0].allowed_origins
+    expose_headers  = []
     max_age_seconds = var.cors_rule[0].max_age_seconds
   }
 }
 
-resource "aws_s3_bucket_policy" "policy-s3" {
+resource "aws_s3_bucket_public_access_block" "bucket" {
   bucket = aws_s3_bucket.bucket.id
 
-  policy = jsonencode({
-    Id      = var.bucket[0].bucket
-    Statement = [
-      {
-        Sid       = var.policy[0].Sid
-        Effect    = var.policy[0].Effect
-        Principal = var.policy[0].Principal
-        Action    = var.action_policy
-        Resource = [aws_s3_bucket.bucket.arn,"${aws_s3_bucket.bucket.arn}/*",]
-      },
-    ]
-  })
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
