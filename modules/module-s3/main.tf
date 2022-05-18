@@ -20,10 +20,6 @@ resource "aws_s3_bucket" "bucket" {
     Project = var.tags[0].Project
     State = var.tags[0].State
   }
-}
-
-resource "aws_s3_bucket_cors_configuration" "example" {
-  bucket = aws_s3_bucket.bucket.bucket
 
   cors_rule {
     allowed_headers = ["*"]
