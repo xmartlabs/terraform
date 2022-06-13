@@ -44,3 +44,9 @@ variable "amiid" {
 variable "user_data_path" {
   description = "User data file path"
 }
+
+# To be run after creation
+variable "iam_instance_profile" {
+  description = "I am instace profile required in the ec2 instance"
+  default = null
+}

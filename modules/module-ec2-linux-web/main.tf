@@ -29,4 +29,5 @@ resource "aws_instance" "ec2-instance" {
     device_index = var.device_index_network_interface
     network_interface_id = var.id_network_interface
   }
+  iam_instance_profile = var.iam_instance_profile
 }
