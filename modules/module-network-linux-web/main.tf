@@ -17,7 +17,7 @@ resource "aws_vpc" "vpc" {
   enable_dns_hostnames = var.vpc[0].enable_dns_hostnames
   enable_dns_support = var.vpc[0].enable_dns_support
   tags = {
-    Name = var.vpc[0].name
+    Name = "${var.proj_prefix}_${var.vpc[0].name}"
     Project = var.tags[0].Project
     State = var.tags[0].State
    }
@@ -29,14 +29,14 @@ resource "aws_subnet" "subnet-1" {
   availability_zone       = var.subnet_prefix[0].availability_zone
   map_public_ip_on_launch = var.subnet_prefix[0].map_public_ip_on_launch
   tags = {
-    Name = var.subnet_prefix[0].name
+    Name = "${var.proj_prefix}_${var.subnet_prefix[0].name}"
     Project = var.tags[0].Project
     State = var.tags[0].State
     }
 }
 
 resource "aws_security_group" "security_group" {
-  name        = var.security_group[0].name
+  name        = "${var.proj_prefix}_${var.security_group[0].name}"
   vpc_id      = aws_vpc.vpc.id
   ingress {
     description = "HTTPS"
@@ -66,7 +66,7 @@ resource "aws_security_group" "security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = var.security_group[0].name
+    Name = "${var.proj_prefix}_${var.security_group[0].name}"
     Project = var.tags[0].Project
     State = var.tags[0].State
     }
@@ -87,7 +87,7 @@ resource "aws_route_table" "route_table" {
      gateway_id      = aws_internet_gateway.igw.id
    }
    tags = {
-        Name = var.route_table[0].name
+        Name = "${var.proj_prefix}_${var.route_table[0].name}"
         Project = var.tags[0].Project
         State = var.tags[0].State
     }
@@ -103,7 +103,7 @@ resource "aws_network_interface" "network_interface" {
   private_ips     = var.network_interface[0].private_ips
   security_groups = [aws_security_group.security_group.id]
   tags = {
-        Name = var.network_interface[0].name
+        Name = "${var.proj_prefix}_${var.network_interface[0].name}"
         Project = var.tags[0].Project
         State = var.tags[0].State
   }
